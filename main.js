@@ -1,6 +1,6 @@
 let ws = new WebSocket('wss://stream.binance.com:9443/ws/btcbusd@ticker')  //<symbol>@ticker solamente para el precio, le ponemos el parametro symbols y le vamos añadiendo los precios qu querramos
 let precio = document.getElementById('precio') // aca le pedimos que nos de el elemento por ID, con el html
-let cripto = document.getElementById('nombre_cripto')
+let cripto = document.getElementById('nombre-cripto')
 let cambio = document.getElementById('cambio')
 let precio_anterior; // la dejamos como variable global
 let precio_actual;
@@ -25,6 +25,9 @@ ws.onmessage = (event)=> {
     cambio.innerHTML = `${objeto.P} %`;
     precio_anterior = (parseFloat(objeto.c).toFixed(2))
     cambio_anterior = objeto.P
+
+    // Agregamos los datos a las celdas de la tabla
+    document.getElementById("nombre-cripto").innerHTML = objeto.s;
+    document.getElementById("precio").innerHTML = `$ ${parseFloat(objeto.c).toFixed(2)}`;
+    document.getElementById("cambio").innerHTML = `${objeto.P}%`;
 }// ahora abrimos para que nos conecte con el servidor
-
-
